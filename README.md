@@ -1,2 +1,2 @@
 # simple-chat
-A Simple Chat Made Web Application using NodeJs
+A Simple Chat Web Application using NodeJs, ReactJs and MongoDb
