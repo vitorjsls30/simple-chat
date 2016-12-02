@@ -1,0 +1,29 @@
+{
+  "name": "simple-chat",
+  "version": "1.0.0",
+  "description": "A Simple Chat Made Web Application using NodeJs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitorjsls30/simple-chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vitorjsls30/simple-chat/issues"
+  },
+  "homepage": "https://github.com/vitorjsls30/simple-chat#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.1"
+  }
+}
