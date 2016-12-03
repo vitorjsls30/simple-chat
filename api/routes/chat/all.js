@@ -1,10 +1,10 @@
 module.exports = (req, res) => {
-  req.model.find((err, rooms) => {
+  req.model.find((err, chats) => {
     if(err) {
       res.send(err);
     }
     else {
-      res.json(rooms);
+      res.json(chats);
     }
   });
 };

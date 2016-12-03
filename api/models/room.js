@@ -7,4 +7,4 @@ var roomSchema = new Schema({
   name: {type: String}
 });
 
-module.exports = mongoose.model('Chat', roomSchema);
+module.exports = mongoose.model('Room', roomSchema);

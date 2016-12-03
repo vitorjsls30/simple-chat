@@ -12,5 +12,31 @@
       "name": "Phyton",
       "description": "for those who want to work quickly and more effectively"
     }
+  ],
+  "chats": [
+    {
+      "id": "1",
+      "content": "Hello!",
+      "roomName": "NodeJs",
+      "userName": "Vitor"
+    },
+    {
+      "id": "2",
+      "content": "Hi!",
+      "roomName": "NodeJs",
+      "userName": "Phill"
+    },
+    {
+      "id": "3",
+      "content": "Wazap?!",
+      "roomName": "NodeJs",
+      "userName": "Vitor"
+    },
+    {
+      "id": "4",
+      "content": "err...nothing?!",
+      "roomName": "NodeJs",
+      "userName": "Phill"
+    }
   ]
 }
