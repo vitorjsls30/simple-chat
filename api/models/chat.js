@@ -5,7 +5,7 @@ var chatSchema = new Schema({
   id: {type: Number},
   created: {type: Date, default: Date.now()},
   roomName: {type: String, default: ''},
-  userName: {type: String, default: ''},
+  userEmail: {type: String, default: ''},
   content: {type: String, default: ''}
 });
 

@@ -38,5 +38,10 @@
       "roomName": "NodeJs",
       "userName": "Phill"
     }
+  ],
+  "users": [
+    {
+      "email": "vitorjsls30@gmail.com"
+    }
   ]
 }
