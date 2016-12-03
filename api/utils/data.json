@@ -1,0 +1,16 @@
+{
+  "rooms": [
+    {
+      "name": "Gupy Devs",
+      "description": "Daily work general subjects"
+    },
+    {
+      "name": "NodeJs",
+      "descripton": "for those who like a non-blocking io model"
+    },
+    {
+      "name": "Phyton",
+      "description": "for those who want to work quickly and more effectively"
+    }
+  ]
+}
