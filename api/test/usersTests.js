@@ -10,8 +10,9 @@ before((done) => {
   .end((err) => {
     if(err) {
       done(err);
+    } else {
+      done();
     }
-    done();
   });
 });
 
@@ -24,8 +25,9 @@ describe('Users Routes', ()=> {
     .end((err) => {
       if(err) {
         done(err);
+      } else {
+        done();
       }
-      done();
     });
   });
 
@@ -40,8 +42,9 @@ describe('Users Routes', ()=> {
     .end((err) => {
       if(err) {
         throw err;
+      } else {
+        done();
       }
-      done();
     });
   });
 
@@ -56,9 +59,9 @@ describe('Users Routes', ()=> {
     .end((err, res) => {
       if(err) {
         throw err;
+      } else {
+        done();
       }
-      res.status.should.be.equal(200);
-      done();
     });
   });
 
@@ -70,21 +73,9 @@ describe('Users Routes', ()=> {
     .end((err) => {
       if(err) {
         throw err;
+      } else {
+        done();
       }
-      done();
-    });
-  });
-
-  it('should remove all users', (done) => {
-    request(app)
-    .del('/users')
-    .expect(200)
-    .end((err, res) => {
-      if(err) {
-        throw err;
-      }
-      res.status.should.be.equal(200);
-      done();
     });
   });
 

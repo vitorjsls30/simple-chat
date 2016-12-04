@@ -10,8 +10,9 @@ before((done) => {
   .end((err) => {
     if(err) {
       done(err);
+    } else {
+      done();
     }
-    done();
   });
 });
 
@@ -23,9 +24,10 @@ describe('Rooms Routes', () => {
     .expect(200)
     .end((err, res) => {
       if(err) {
-        return done(err);
+        done(err);
+      } else {
+        done();
       }
-      done();
     });
   });
 
@@ -39,10 +41,11 @@ describe('Rooms Routes', () => {
     .send(room)
     .end((err, res) => {
       if(err) {
-        return done(err);
+        done(err);
+      } else {
+        res.status.should.be.equal(200);
+        done();
       }
-      res.status.should.be.equal(200);
-      done();
     });
   });
 
@@ -56,9 +59,10 @@ describe('Rooms Routes', () => {
     .expect(200)
     .end((err, res) => {
       if(err) {
-        return done(err);
+        done(err);
+      } else {
+        done();
       }
-      done();
     });
   });
 
@@ -68,9 +72,10 @@ describe('Rooms Routes', () => {
     .expect(200)
     .end((err, res) => {
       if(err) {
-        return done(err);
+        done(err);
+      } else {
+        done();
       }
-      done();
     });
   });
 
