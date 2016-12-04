@@ -11,3 +11,5 @@ app.use('/', routes);
 app.listen(3000, () => {
   console.log('Starting our loved app...');
 });
+
+module.exports = app;

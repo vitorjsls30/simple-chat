@@ -4,7 +4,7 @@
   "description": "A Simple Chat Made Web Application using NodeJs",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd api && mocha test",
     "start": "nodemon app.js"
   },
   "repository": {
@@ -19,7 +19,10 @@
   "homepage": "https://github.com/vitorjsls30/simple-chat#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "nodemon": "^1.11.0"
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "should": "^11.1.1",
+    "supertest": "^2.0.1"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
