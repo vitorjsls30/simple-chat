@@ -1,9 +1,12 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
 const should = require('should');
-const app = require('../../app.js');
+const app = require('../../app');
+const config = require('../../config');
 
 before((done) => {
+  mongoose.connect(config.db.mongodb);
+
   request(app)
   .get('/rooms/setup')
   .expect(200)
