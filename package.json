@@ -4,7 +4,7 @@
   "description": "A Simple Chat Made Web Application using NodeJs",
   "main": "app.js",
   "scripts": {
-    "test": "cd api && mocha test",
+    "test": "cd api && mocha test --watch",
     "start": "nodemon app.js"
   },
   "repository": {
