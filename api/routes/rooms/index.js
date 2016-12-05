@@ -5,24 +5,19 @@ const roomModel = require('../../models/room');
 const hasModel = require('../../utils/modelVerifyer');
 
 rooms.use((req, res, next) => {
-  console.log('inside rooms...');
   next();
 });
 
 rooms.route('/setup')
   .get((req, res) => {
-    console.log('doing rooms setup...');
     var mockData = require('../../utils/data.json');
 
     mockData.rooms.map((roomItem) => {
-      console.log('inside map...');
       var room = new roomModel();
       room.name = roomItem.name;
       room.description = roomItem.description;
-      console.log(room);
       room.save((err) => {
         if(err) {
-          console.log(err);
           res.send(err);
         }
         console.log('Room ' + room.name + ' inserted!');

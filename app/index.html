@@ -14,10 +14,11 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
   var socket = io();
+
   var userEmail = document.getElementById('user-email');
   var startBtn = document.getElementById('start-btn');
+
   startBtn.addEventListener('click', (evt) => {
     socket.emit('user Login', userEmail.value);
   });
-
 </script>
