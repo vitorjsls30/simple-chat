@@ -1,6 +1,6 @@
 const request = require('supertest');
 const should = require('should');
-const app = require('../../app');
+const app = require('../../app').api;
 
 before((done) => {
   request(app)

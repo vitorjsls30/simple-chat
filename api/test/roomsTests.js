@@ -1,7 +1,7 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
 const should = require('should');
-const app = require('../../app');
+const app = require('../../app').api;
 const config = require('../../config');
 
 before((done) => {
