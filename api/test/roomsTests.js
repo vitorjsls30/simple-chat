@@ -36,7 +36,6 @@ describe('Rooms Routes', () => {
 
   it('should post a new room', (done) => {
     var room = {
-      description: 'Test Description',
       name: 'Test-Room'
     };
     request(app)

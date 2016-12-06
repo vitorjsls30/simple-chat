@@ -32,8 +32,6 @@ rooms.route('/')
   .post((req, res) => {
     var room = new roomModel();
     room.name = req.body.name;
-    room.description = req.body.description;
-
     room.save((err) => {
       if(err) {
         res.send(err);
@@ -41,7 +39,7 @@ rooms.route('/')
       else {
         res.json('Chat Room created successfully!');
       }
-    })
+    });
   })
   .delete((req, res) => {
     roomModel.remove((err) => {

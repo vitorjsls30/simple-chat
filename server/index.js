@@ -45,12 +45,34 @@ io.on('connection', (socket) => {
   socket.on(events.setup_rooms, (data) => {
     socket.join(data.currentRoom).emit({userEmail: data.userEmail, content: data.userEmail + ' joined room'});
     var result = {rooms: '', chats: ''};
+
     request
       .get(mapUrl('rooms'))
       .end((err, res) => {
           if(err) {
             throw err;
           }
+
+          if(data.currentRoom != '') {
+            var exists = false;
+            res.body.map((item) => {
+              if(item.name === data.currentRoom) {
+                exists = true;
+              }
+            });
+
+            if(!exists) {
+              request
+                .post('rooms/')
+                .send({name: currentRoom})
+                .end((err) => {
+                  if(err) {
+                    throw err;
+                  }
+                });
+            }
+          }
+
           result.rooms = res.body;
           request
             .get(mapUrl('chats/' + data.currentRoom))
