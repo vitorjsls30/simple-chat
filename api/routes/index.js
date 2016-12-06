@@ -12,8 +12,16 @@ routes.use('/rooms', rooms);
 routes.use('/chats', chats);
 routes.use('/users', users);
 
-routes.get('/login', (req, res) => {
+routes.get('/', (req, res) => {
   res.sendFile(path.resolve('app/index.html'));
-})
+});
+
+routes.get('/channels', (req, res) => {
+  res.sendFile(path.resolve('app/channels.html'));
+});
+
+routes.get('/*', (req, res) => {
+  res.sendFile(path.resolve('app/chat.html'));
+});
 
 module.exports = routes;

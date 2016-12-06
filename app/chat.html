@@ -5,6 +5,62 @@
     <title>Desafio Gupy - Simple Chat</title>
   </head>
   <body>
-
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <ul id="rooms-list" class="list-group">
+            <li>Salas:</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <ul id="msgs-list" class="list-group">
+          <li>Mensagens:</li>
+          </ul>
+        </div>
+      </div>
+      <form class="navbar-form" id="form" onsubmit="return false;">
+        <div class="form-group"  style="width:83%">
+          <input id="new-message" type="text" class="form-control" placeholder="Search" style="width:100%">
+        </div>
+        <button type="submit" class="btn ban-primary" onclick="sendFunction()" style="width:16%">Send</button>
+      </form>
+    </div>
   </body>
 </html>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+  var socket = io();
+
+  socket.emit('setup rooms', {});
+
+  socket.on('setup rooms', (data) => {
+    data.map((item) => {
+      console.log(item);
+      var ul = document.getElementById('rooms-list');
+      var li = document.createElement('li');
+      li.appendChild(document.createTextNode(item.name));
+      li.addEventListener('click', () => {
+        console.log('li click...');
+          socket.emit('switch room', {oldRoom: localStorage.getItem('currentRoom'),
+            currentRoom: item.name,
+            userEmail: localStorage.getItem('userEmail')
+          });
+          localStorage.setItem('currentRoom', item.name);
+          window.location = '/' + item.name;
+      })
+      ul.appendChild(li);
+    });
+  });
+
+  socket.on('new user', (data) => {
+    console.log('new user reached....');
+    var ul = document.getElementById('msgs-list');
+    var li = document.createElement('li');
+    li.appendChild(document.createTextNode(data));
+  });
+
+</script>

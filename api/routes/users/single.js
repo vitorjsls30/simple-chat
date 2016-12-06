@@ -1,5 +1,5 @@
 module.exports = (req, res) => {
-  req.model.find({email: req.params.userEmail}, (err, user) => {
+  req.model.find({email: req.params.email}, (err, user) => {
     if(err) {
       res.send(err);
     }

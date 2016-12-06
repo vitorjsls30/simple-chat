@@ -1,0 +1,9 @@
+{
+    "user_login": "user login",
+    "user_logout": "user logout",
+    "user_registered": "user registered",
+    "new_message": "new message",
+    "new_user": "new user",
+    "setup_rooms": "setup rooms",
+    "switch_room": "switch room"
+}

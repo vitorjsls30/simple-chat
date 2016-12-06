@@ -29,7 +29,7 @@ users.route('/')
   .get(hasModel(usersModel), all)
   .post((req, res) => {
     var user = new usersModel();
-    user.email = req.body.userEmail;
+    user.email = req.body.email;
     user.save((err) => {
       if(err) {
         res.send(err);
@@ -49,7 +49,7 @@ users.route('/')
 users.route('/:userEmail')
   .get(hasModel(usersModel), single)
   .delete((req, res) => {
-    usersModel.remove({email: req.params.userEmail}, (err) => {
+    usersModel.remove({email: req.params.email}, (err) => {
       if(err) {
         res.send(err);
       }

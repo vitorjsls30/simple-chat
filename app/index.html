@@ -6,8 +6,8 @@
   </head>
   <body>
     <div>
-    <input type="text" name="user-email" id="user-email" />
-    <input type="button" name="start-btn" id="start-btn" value="Start!"/>
+      <input type="text" name="user-email" id="user-email" />
+      <input type="button" name="start-btn" id="start-btn" value="Start!"/>
     </div>
   </body>
 </html>
@@ -19,6 +19,13 @@
   var startBtn = document.getElementById('start-btn');
 
   startBtn.addEventListener('click', (evt) => {
-    socket.emit('user Login', userEmail.value);
+
+    socket.emit('user login', userEmail.value);
+
+    socket.on('user registered', (data) => {
+      localStorage.setItem('userEmail', data);
+      window.location = '/chat';
+    });
+
   });
 </script>
