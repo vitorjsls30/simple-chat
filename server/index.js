@@ -60,12 +60,4 @@ io.on('connection', (socket) => {
       });
   });
 
-  socket.on(events.switch_room, (data) => {
-    socket.leave(data.oldRoom);
-    socket.join(data.currentRoom);
-    console.log('switch room: ', data);
-    //io.in(data.oldRoom).emit(events.new_message, ' User ' + data.userEmail + ' disconnected!');
-    io.in(data.currentRoom).emit(events.new_user, 'User ' + data.userEmail + ' joined room');
-  });
-
 });
