@@ -30,13 +30,12 @@ describe('Chat Messages Routes', (done) => {
     });
   });
 
-  it('should retrieve a single chat message', (done) => {
+  it('should retrieve all chats from a room', (done) => {
     request(app)
-    .get('/chats')
-    .send({id: '1'})
+    .get('/chats/NodeJs')
     .expect(200)
     .expect((res) => {
-      res.body[0].should.have.property('id').equal(1);
+      res.body.length.should.be.above(0);
     })
     .end((err) => {
       if(err) {
@@ -49,7 +48,6 @@ describe('Chat Messages Routes', (done) => {
 
   it('should post a new chat message', (done) => {
     var chatMessage = {
-      id: 5,
       content: 'mock chat message',
       roomName: 'NodeJs',
       userName: 'Phill'
@@ -66,20 +64,6 @@ describe('Chat Messages Routes', (done) => {
         done();
       }
     });
-  });
-
-  it('should remove a single chat message', (done) => {
-    request(app)
-    .del('/chats')
-    .send({id: '1'})
-    .expect(200)
-    .end((err) => {
-      if(err) {
-        done(err);
-      } else {
-        done();
-      }
-    })
   });
 
   it('should remove all chat messages', (done) => {

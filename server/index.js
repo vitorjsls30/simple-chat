@@ -20,12 +20,7 @@ io.on('connection', (socket) => {
 
   console.log('a user connected!');
 
-  socket.emit(events.setup, ()=> {
-
-  })
-
   socket.on(events.user_login, (data) => {
-    console.log('user: ', data);
     request
       .get(mapUrl('users'))
       .end((err, res) => {
@@ -40,38 +35,50 @@ io.on('connection', (socket) => {
                 if(err) {
                   throw err;
                 }
-                socket.emit(events.user_registered, data);
               });
           }
-          socket.emit(events.user_registered, data);
+          socket.emit(events.user_login, data);
         }
       });
   });
 
-  socket.on(events.setup_rooms, (currentRoom) => {
-    var data = {rooms: '', chats: ''};
-
+  socket.on(events.setup_rooms, (data) => {
+    socket.join(data.currentRoom).emit({userEmail: data.userEmail, content: data.userEmail + ' joined room'});
+    var result = {rooms: '', chats: ''};
     request
       .get(mapUrl('rooms'))
       .end((err, res) => {
           if(err) {
             throw err;
           }
-          data.rooms = res.body;
-          //TODO: RETORNAR AS MSGS DE UMA DADA ROOM. CRIAR ROTA ANINHADA NA API
+          result.rooms = res.body;
           request
-            .get(mapUrl('chats'))
+            .get(mapUrl('chats/' + data.currentRoom))
             .end((err, res) => {
                 if(err) {
                   throw err;
                 }
-                console.log('chat response:');
-                console.log(res.body);
-                data.chats = res.body;
-                console.log(data);
-                socket.emit(events.setup_rooms, data);
+                result.chats = res.body;
+                socket.emit(events.setup_rooms, result);
             });
       });
+  });
+
+  socket.on(events.new_message, (data) => {
+    var message = {
+      roomName: data.roomName,
+      userEmail: data.userEmail,
+      content: data.content
+    };
+    request
+      .post(mapUrl('chats'))
+      .send(message)
+      .end((err) => {
+        if(err) {
+          throw err;
+        }
+        io.in(data.roomName).emit('new message', data);
+      })
   });
 
 });

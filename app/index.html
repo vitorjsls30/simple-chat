@@ -51,14 +51,14 @@
 <script>
   var socket = io();
   var pathName = window.location.pathname;
-  var currentRoom = pathName;
+  var currentRoom = pathName.slice(1);
 
   if(pathName == '/') {
     var startBtn = document.getElementById('start-btn');
     startBtn.addEventListener('click', (evt) => {
       var userEmail = document.getElementById('user-email');
       socket.emit('user login', userEmail.value);
-      socket.on('user registered', (data) => {
+      socket.on('user login', (data) => {
         localStorage.setItem('userEmail', data);
         $('#login-row').css('display', 'none');
         $('#chat-row').show();
@@ -69,7 +69,7 @@
     $('#chat-row').show();
   }
 
-  socket.emit('setup rooms', {currentRoom: currentRoom});
+  socket.emit('setup rooms', {userEmail: localStorage.getItem('userEmail'), currentRoom: currentRoom});
   socket.on('setup rooms', (data) => {
     data.rooms.map((item) => {
       $('div#rooms-list').append('<a href="/'+item.name+'" class="list-group-item">'+item.name+'</a>');
@@ -80,6 +80,13 @@
   });
 
   $('input#send-btn').click(()=> {
-    console.log('yo!');
+    console.log($('input#user-message').val());
+    socket.emit('new message', {roomName: currentRoom, userEmail: localStorage.getItem('userEmail'), content: $('input#user-message').val()});
+    $('input#user-message').val('');
+  });
+
+  socket.on('new message', (data) => {
+    console.log('here...');
+    $('div#chat-history').append('<h5>'+data.userEmail+'</h5><p>'+data.content+'</p>');
   });
 </script>
