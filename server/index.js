@@ -48,15 +48,29 @@ io.on('connection', (socket) => {
       });
   });
 
-  socket.on(events.setup_rooms, () => {
+  socket.on(events.setup_rooms, (currentRoom) => {
+    var data = {rooms: '', chats: ''};
+
     request
       .get(mapUrl('rooms'))
       .end((err, res) => {
           if(err) {
             throw err;
           }
-          console.log(res.body);
-          socket.emit(events.setup_rooms, res.body)
+          data.rooms = res.body;
+          //TODO: RETORNAR AS MSGS DE UMA DADA ROOM. CRIAR ROTA ANINHADA NA API
+          request
+            .get(mapUrl('chats'))
+            .end((err, res) => {
+                if(err) {
+                  throw err;
+                }
+                console.log('chat response:');
+                console.log(res.body);
+                data.chats = res.body;
+                console.log(data);
+                socket.emit(events.setup_rooms, data);
+            });
       });
   });
 

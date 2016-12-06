@@ -38,7 +38,7 @@
           </div>
         </div>
           <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
-            <div class="list-group">
+            <div class="list-group" id="rooms-list">
               <a href="#" class="list-group-item">Sala</a>
             </div>
           </div>
@@ -50,29 +50,36 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
   var socket = io();
+  var pathName = window.location.pathname;
+  var currentRoom = pathName;
 
-  var startBtn = document.getElementById('start-btn');
-
-  startBtn.addEventListener('click', (evt) => {
-
-    var userEmail = document.getElementById('user-email');
-    
-    socket.emit('user login', userEmail.value);
-
-    socket.on('user registered', (data) => {
-      localStorage.setItem('userEmail', data);
-      $('#login-row').css('display', 'none');
-      $('#chat-row').show();
-
-      socket.emit('setup rooms', {});
-
-      socket.on('setup rooms', (data) => {
-        data.map((item) => {
-          console.log(item);
-        });
+  if(pathName == '/') {
+    var startBtn = document.getElementById('start-btn');
+    startBtn.addEventListener('click', (evt) => {
+      var userEmail = document.getElementById('user-email');
+      socket.emit('user login', userEmail.value);
+      socket.on('user registered', (data) => {
+        localStorage.setItem('userEmail', data);
+        $('#login-row').css('display', 'none');
+        $('#chat-row').show();
       });
-
     });
+  } else {
+    $('#login-row').css('display', 'none');
+    $('#chat-row').show();
+  }
 
+  socket.emit('setup rooms', {currentRoom: currentRoom});
+  socket.on('setup rooms', (data) => {
+    data.rooms.map((item) => {
+      $('div#rooms-list').append('<a href="/'+item.name+'" class="list-group-item">'+item.name+'</a>');
+    });
+    data.chats.map((item) => {
+      $('div#chat-history').append('<h5>'+item.userEmail+'</h5><p>'+item.content+'</p>');
+    });
+  });
+
+  $('input#send-btn').click(()=> {
+    console.log('yo!');
   });
 </script>

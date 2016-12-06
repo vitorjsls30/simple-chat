@@ -16,12 +16,8 @@ routes.get('/', (req, res) => {
   res.sendFile(path.resolve('app/index.html'));
 });
 
-routes.get('/channels', (req, res) => {
-  res.sendFile(path.resolve('app/channels.html'));
-});
-
 routes.get('/*', (req, res) => {
-  res.sendFile(path.resolve('app/chat.html'));
+  res.sendFile(path.resolve('app/index.html'));
 });
 
 module.exports = routes;
