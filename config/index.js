@@ -1,5 +1,5 @@
 module.exports = {
   'db': {
-    'mongodb': 'mongodb://127.0.0.1:27017'
+    'mongodb': 'mongodb://root:123@ds127978.mlab.com:27978/gupydev'
   }
 };

@@ -11,36 +11,34 @@
   <body>
     <div class="container">
 
-      <div class="row" id="login-row" style="display:none;">
-        <div class="col-lg-12">
-          <div id="frm-login">
-            <div class="form-group col-sm-12">
-              <input type="text" class="form-control" name="user-email" id="user-email" />
-            </div>
-            <input type="button" name="start-btn" id="start-btn" value="Start!"/>
-          </div>
-        </div>
-      </div>
-
-      <div class="row row-offcanvas roww-offcanvas-right" id="chat-row" style="display:none;">
-        <div class="col-lg-9" id="chat-messages">
-          <div class="col-lg-9" id="chat-history">
-            <div>
-              <h5>User</h4>
-              <p>Message Example!</p>
+      <div class="row">
+        <div class="col-lg-9">
+          <div class="row" id="login-row" style="display:none;">
+            <div id="frm-login">
+              <div class="">
+                <input type="text" class="form-control" name="user-email" id="user-email" />
+              </div>
+              <input type="button" name="start-btn" id="start-btn" value="Start!"/>
             </div>
           </div>
-          <div id="frm-massage">
-            <div class="form-group">
-              <input type="text" class="form-control" name="user-message" id="user-message" />
-              <input type="button" name="send-btn" id="send-btn" value="Send"/>
+          <div class="row" id="chat-row" style="display:none;">
+            <div class="" id="chat-messages">
+              <div class="" id="chat-history"></div>
+              <div id="frm-massage">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="user-message" id="user-message" />
+                  <input type="button" name="send-btn" id="send-btn" value="Send"/>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-3 sidebar-offcanvas" id="sidebar" style="display:none;">
-        <div class="list-group" id="rooms-list">
-          <a href="#" class="list-group-item">Sala</a>
+        <div class="col-lg-3">
+          <div class="sidebar-offcanvas" id="sidebar" style="display:none;">
+            <div class="list-group" id="rooms-list">
+              <a href="#" class="list-group-item"><b>Salas</b></a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -82,13 +80,11 @@
   });
 
   $('input#send-btn').click(()=> {
-    console.log($('input#user-message').val());
     socket.emit('new message', {roomName: currentRoom, userEmail: localStorage.getItem('userEmail'), content: $('input#user-message').val()});
     $('input#user-message').val('');
   });
 
   socket.on('new message', (data) => {
-    console.log('here...');
     $('div#chat-history').append('<h5>'+data.userEmail+'</h5><p>'+data.content+'</p>');
   });
 </script>
