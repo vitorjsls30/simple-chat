@@ -1,7 +1,7 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
 const should = require('should');
-const app = require('../../app');
+const app = require('../../app').api;
 const config = require('../../config');
 
 before((done) => {
@@ -36,7 +36,6 @@ describe('Rooms Routes', () => {
 
   it('should post a new room', (done) => {
     var room = {
-      description: 'Test Description',
       name: 'Test-Room'
     };
     request(app)

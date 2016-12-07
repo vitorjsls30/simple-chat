@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "cd api && mocha test --watch",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js start"
   },
   "repository": {
     "type": "git",
@@ -22,11 +22,14 @@
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "should": "^11.1.1",
+    "socket.io": "^1.7.1",
     "supertest": "^2.0.1"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "mongoose": "^4.7.1"
+    "mongoose": "^4.7.1",
+    "socket.io": "^1.7.1",
+    "superagent": "^3.1.0"
   }
 }

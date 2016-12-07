@@ -1,15 +1,19 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const routes = require('./api/routes');
 
-const port = process.env.PORT || 3000;
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/app'));
 app.use('/', routes);
 
-app.listen(port, () => {
-  console.log('Starting our loved app...');
-});
-
-module.exports = app;
+module.exports = {
+  api: app,
+  start: () => {
+    var port = process.env.PORT || 3000;
+    app.listen(port, () => {
+      console.log('Starting our loved api...');
+    });
+  }
+};

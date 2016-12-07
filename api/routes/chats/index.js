@@ -1,6 +1,6 @@
 const chats = require('express').Router();
 const all = require('./all');
-const single = require('./single');
+const roomChats = require('./rooms');
 const chatModel = require('../../models/chat');
 const hasModel = require('../../utils/modelVerifyer');
 
@@ -56,14 +56,14 @@ chats.route('/')
     });
   });
 
-chats.route('/:chatId')
-  .get(hasModel(chatModel), single)
+chats.route('/:roomName')
+  .get(hasModel(chatModel), roomChats)
   .delete((req, res) => {
-    chatModel.remove({id: req.params.chatId}, (err)=> {
+    chatModel.remove({roomName: req.params.roomName}, (err)=> {
       if(err) {
         res.send(err);
       }
-      res.json('Chat Message removed successfully!');
+      res.json('Chat Messages removed successfully!');
     })
   });
 
