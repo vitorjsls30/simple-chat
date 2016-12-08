@@ -36,25 +36,9 @@ users.route('/')
       }
       res.json('User Saved successfully!');
     })
-  })
-  .delete((req, res) => {
-    usersModel.remove((err) => {
-      if(err) {
-        res.send(err);
-      }
-      res.json('Users removed successfully!');
-    })
   });
 
 users.route('/:userEmail')
-  .get(hasModel(usersModel), single)
-  .delete((req, res) => {
-    usersModel.remove({email: req.params.email}, (err) => {
-      if(err) {
-        res.send(err);
-      }
-      res.json('User removed successfully!');
-    });
-  })
+  .get(hasModel(usersModel), single);
 
 module.exports = users;

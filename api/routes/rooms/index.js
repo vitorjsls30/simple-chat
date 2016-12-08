@@ -40,25 +40,9 @@ rooms.route('/')
         res.json('Chat Room created successfully!');
       }
     });
-  })
-  .delete((req, res) => {
-    roomModel.remove((err) => {
-      if(err) {
-        res.send(err);
-      }
-      res.json('Chat Rooms removed successfully!');
-    });
   });
 
 rooms.route('/:roomName')
-  .get(hasModel(roomModel), single)
-  .delete((req, res) => {
-    roomModel.remove({name: req.params.roomName}, (err, room) => {
-      if(err) {
-        res.send(err);
-      }
-      res.json('Room removed successfully!');
-    });
-  });
+  .get(hasModel(roomModel), single);
 
 module.exports = rooms;

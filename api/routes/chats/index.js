@@ -46,25 +46,9 @@ chats.route('/')
         res.json('Chat Message created successfully!');
       }
     })
-  })
-  .delete((req, res) => {
-    chatModel.remove((err) => {
-      if(err) {
-        res.send(err);
-      }
-      res.json('Chat Messages removed successfully!');
-    });
   });
 
 chats.route('/:roomName')
-  .get(hasModel(chatModel), roomChats)
-  .delete((req, res) => {
-    chatModel.remove({roomName: req.params.roomName}, (err)=> {
-      if(err) {
-        res.send(err);
-      }
-      res.json('Chat Messages removed successfully!');
-    })
-  });
+  .get(hasModel(chatModel), roomChats);
 
 module.exports = chats;
